@@ -2,5 +2,6 @@ Flask
 scikit-learn==0.23.2
 pandas
 numpy
+gunicorn
 matplotlib
-joblib
+
