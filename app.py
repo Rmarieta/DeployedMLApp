@@ -23,9 +23,10 @@ def predictapi() :
 def predict() :
     data = [float(elem) for elem in request.form.values()]
     inp = std_scaler.transform(np.array(data).reshape(1,-1))
-    out = model.predict(inp)[0]
-    return render_template("home_page.html",prediction=f"Predicted housing price : {out}")
+    out = round(model.predict(inp)[0],2)
+    return render_template("home_page.html",prediction=f"$ {out}")
 
 if __name__ == "__main__" :
 
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
+    #app.run(debug=True)

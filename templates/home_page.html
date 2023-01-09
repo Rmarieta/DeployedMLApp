@@ -23,96 +23,177 @@
       rel="stylesheet"
       type="text/css"
     />
+
+    <style>
+      body {
+        background-color: #353535;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      }
+      .login {
+        background-color: #454545;
+        width: 75%;
+        border-radius: 5px;
+        text-align: center;
+      }
+      .title {
+        color: #c0c0c0;
+        border-bottom: solid 10px #353535;
+        padding: 10px;
+        margin-bottom: 40px;
+      }
+      input {
+        background-color: #353535;
+        box-shadow: none;
+        border: none;
+        margin: 2px;
+        padding: 12px;
+        color: #c0c0c0;
+      }
+      .formdiv {
+        width: 45%;
+        float: left;
+      }
+      button {
+        margin-top: 25px;
+        margin-bottom: 40px;
+        background-color: #353535;
+        border: #c0c0c0 solid 4px;
+        color: #c0c0c0;
+        padding: 15px;
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-size: 20px;
+        border-radius: 10px;
+      }
+      .predcontainer {
+        width: 55%;
+        float: right;
+        display: flex;
+        justify-content: center;
+        background-color: #454545;
+      }
+      .pred {
+        color: #c0c0c0;
+        width: 55%;
+        padding: 35px;
+        border-radius: 10px;
+        background-color: #353535;
+        font-size: 18px;
+        line-height: 26px;
+      }
+      .predp {
+        font-size: 30px;
+      }
+    </style>
   </head>
 
   <body>
     <div class="login">
-      <h1>Boston House Price Prediction</h1>
-
+      <div class="title">
+        <h1>Boston House Price Prediction</h1>
+      </div>
       <!-- Main Input For Receiving Query to our ML -->
-      <form action="{{ url_for('predict')}}" method="post">
-        <input
-          type="text"
-          name="CRIM"
-          placeholder="CRIM"
-          required="required"
-        /><br />
-        <input
-          type="text"
-          name="ZN"
-          placeholder="ZN"
-          required="required"
-        /><br />
-        <input
-          type="text"
-          name="INDUS"
-          placeholder="INDUS"
-          required="required"
-        /><br />
-        <input
-          type="text"
-          name="CHAS"
-          placeholder="CHAS"
-          required="required"
-        /><br />
-        <input
-          type="text"
-          name="NOX"
-          placeholder="NOX"
-          required="required"
-        /><br />
-        <input
-          type="text"
-          name="RM"
-          placeholder="RM"
-          required="required"
-        /><br />
-        <input
-          type="text"
-          name="Age"
-          placeholder="Age"
-          required="required"
-        /><br />
-        <input
-          type="text"
-          name="DIS"
-          placeholder="DIS"
-          required="required"
-        /><br />
-        <input
-          type="text"
-          name="RAD"
-          placeholder="RAD"
-          required="required"
-        /><br />
-        <input
-          type="text"
-          name="TAX"
-          placeholder="TAX"
-          required="required"
-        /><br />
-        <input
-          type="text"
-          name="PTRATIO"
-          placeholder="PTRATIO"
-          required="required"
-        /><br />
-        <input type="text" name="B" placeholder="B" required="required" /><br />
-        <input
-          type="text"
-          name="LSTAT"
-          placeholder="LSTAT"
-          required="required"
-        /><br />
+      <div class="formdiv">
+        <form action="{{ url_for('predict')}}" method="post">
+          <input
+            type="text"
+            name="CRIM"
+            placeholder="CRIM"
+            required="required"
+          /><br />
+          <input
+            type="text"
+            name="ZN"
+            placeholder="ZN"
+            required="required"
+          /><br />
+          <input
+            type="text"
+            name="INDUS"
+            placeholder="INDUS"
+            required="required"
+          /><br />
+          <input
+            type="text"
+            name="CHAS"
+            placeholder="CHAS"
+            required="required"
+          /><br />
+          <input
+            type="text"
+            name="NOX"
+            placeholder="NOX"
+            required="required"
+          /><br />
+          <input
+            type="text"
+            name="RM"
+            placeholder="RM"
+            required="required"
+          /><br />
+          <input
+            type="text"
+            name="Age"
+            placeholder="Age"
+            required="required"
+          /><br />
+          <input
+            type="text"
+            name="DIS"
+            placeholder="DIS"
+            required="required"
+          /><br />
+          <input
+            type="text"
+            name="RAD"
+            placeholder="RAD"
+            required="required"
+          /><br />
+          <input
+            type="text"
+            name="TAX"
+            placeholder="TAX"
+            required="required"
+          /><br />
+          <input
+            type="text"
+            name="PTRATIO"
+            placeholder="PTRATIO"
+            required="required"
+          /><br />
+          <input
+            type="text"
+            name="B"
+            placeholder="B"
+            required="required"
+          /><br />
+          <input
+            type="text"
+            name="LSTAT"
+            placeholder="LSTAT"
+            required="required"
+          /><br />
 
-        <button type="submit" class="btn btn-primary btn-block btn-large">
-          Predict
-        </button>
-      </form>
-
-      <br />
-      <br />
+          <button type="submit" class="btn btn-primary btn-block btn-large">
+            PREDICT
+          </button>
+        </form>
+      </div>
+      {% if prediction == null %}
+      <div></div>
+      {% else %}
+      <div class="predcontainer">
+        <div class="pred">
+          <p>
+            With all the input values, the trained linear regressor predicts a
+            housing price of :
+          </p>
+          <p class="predp">{{prediction}}</p>
+        </div>
+      </div>
+      {% endif %}
     </div>
-    {{prediction}}
   </body>
 </html>
